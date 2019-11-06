@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JSON Practice Assignment</title>
+		<style>
+		p1 {
+			align-items: center;
+		}
+		table, th, td {
+			align: center;
+			border: 1px solid black;
+		}
+
+		</style>
+	</head>
+	<body>
+		<h1 align="center">JSON's Playlist</h1><hr>
+		<!------------Part I & II--------------------------------->
+			<script type="text/javascript">
+				function Track(title, artist, album, genre, year){
+					this.title = title;
+					this.artist = artist;
+					this.album = album;
+					this.genre = genre;
+					this.release = year; 
+				}
+				playlist = new Array();
+				playlist[0] = new Track("Closed on Sunday", "Kanye West", "Jesus is King", "Hip-Hop/Rap", 2019);
+				playlist[1] = new Track("Dreams", "Fleetwood Mac", "Rumours", "Rock", 1977);
+				playlist[2] = new Track("Red Red Wine", "UB40", "Labour of Love", "Reggae", 1983);
+				playlist[3] = new Track("Jamming", "Bob Marley & The Wailers", "Legend (Remastered)", "Reggae", 1984);
+				playlist[4] = new Track("Baptized in Fire", "Kid Cudi", "Passion, Pain & Demon Slayin'", "Hip-Hop/Rap", 2016);
+				playlist[5] = new Track("In Tune", "Big Sean & Metro Boomin", "Double or Nothing", "Hip-Hop/Rap", 2017);
+				playlist[6] = new Track("I Want You (She's So Heavy)", "The Beatles", "Abbey Road", "Rock", 1969);	
+				playlist[7] = new Track("Welcome to the Machine", "Pink Floyd", "Wish You Were Here", "Rock", 1975);
+				playlist[8] = new Track("Sultans of Swing", "Dire Straits", "Dire Straits", "Pop", 1978);	
+				playlist[9] = new Track("Patience", "Nas & Damian \"Jr. Gong\" Marley", "Distant Relatives", "Reggae", 2010);
+				playlist[10] = new Track("Streatham", "Dave", "Psychodrama", "Hip-Hop/Rap", 2019);				
+			 </script>
+		<!------------Part II--------------------------------->
+		<h3>Part II</h3>
+		<script>	
+			for (i = 0; i < playlist.length; i++) {
+				document.write (playlist[i].title + "<br />");
+				s = JSON.stringify(playlist[i]);
+				document.write(s+"<br />");	
+			}
+		</script>
+		<!------------Part III & IV --------------------------------->
+		<h3>Part III & IV</h3>
+		<form>
+		View by Genre: <select id="pick_genre">
+			<option value="0">Any</option>
+			<option value="1">Hip-Hop/Rap</option>
+			<option value="2">Reggae</option>
+			<option value="3">Rock</option>
+			<option value="4">Pop</option>
+			</select>
+			<button type="button" onclick="display_genre()">Click</button>
+		</form>
+		<hr>
+		<p1 id="demo"></p1>
+		<script>
+			function makeTable(text){
+				text= "<tr><td>"+playlist[i].title+"</td><td>"
+				+playlist[i].artist+"</td><td>"+playlist[i].album+"</td><td>"
+				+playlist[i].genre+"</td><td>"+playlist[i].release+"</td></tr>";
+				return text;
+			}
+			var txt = "<table><tr><th>Title</th>";
+			txt+= "<th>Artist</th>";
+			txt+= "<th>Album</th>";
+			txt+="<th>Genre</th>";
+			txt+= "<th>Year</th></tr>";
+			for (i=0;i<playlist.length;i++){
+				txt+= makeTable(txt);
+
+			}
+			txt+= "</table>";
+			//document.write(txt);
+			document.getElementById("demo").innerHTML = txt;
+
+			function display_genre(){
+				var pick = document.getElementById("pick_genre").value;
+				var txt2 = "<table><tr><th>Title</th>";
+				txt2+= "<th>Artist</th>";
+				txt2+= "<th>Album</th>";
+				txt2+="<th>Genre</th>";
+				txt2+= "<th>Year</th></tr>";
+					for (i = 0; i < playlist.length; i++) {
+						if (pick == 0){
+							txt2+= makeTable(txt2);
+						}
+						else if ((pick == 1) && (playlist[i].genre == "Hip-Hop/Rap")){
+							txt2+= makeTable(txt2);
+						}
+						else if ((pick == 2) && (playlist[i].genre == "Reggae")){
+							txt2+= makeTable(txt2);
+						}
+						else if ((pick == 3) && (playlist[i].genre == "Rock")){
+							txt2+= makeTable(txt2);
+						}
+						else if ((pick == 4) && (playlist[i].genre == "Pop")){
+							txt2+= makeTable(txt2);
+						}
+					}
+					txt2+="</table>";
+					document.getElementById("demo").innerHTML = txt2;
+					//document.write(txt2);
+			}
+		</script>
+	</body>
+</html>
